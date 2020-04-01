@@ -2,6 +2,8 @@ const User = require("../models/user");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt'); //for auth check
+
+
 exports.signup = (req, res) => {
     // console.log("req.body", req.body);
     const user = new User(req.body);
@@ -51,4 +53,9 @@ exports.signin =(req, res) => {
             message: "Login Sucess"
         })
     })
+}
+exports.signout = (req,res) =>{
+    res.clearCookie('t');
+    res.json({message:"Logout successful"})
+
 }
