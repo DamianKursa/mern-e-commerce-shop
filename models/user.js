@@ -50,6 +50,13 @@ userSchema
     });
 
 userSchema.methods = {
+    /* Tworzysz metode auth gdzie zwracasz przepuszczony plainText przez 
+    enkryptowana metode i porónujesz  hashed hasło z PlainText */
+    authenticate : function(plainText){
+        return this.encryptPassword(plainText) === this.hashed_password;
+    },
+
+
     encryptPassword: function(password) {
         if (!password) return "";
         try {
