@@ -4,7 +4,7 @@ const router = express.Router();
 const { createProduct } = require("../controllers/product");
 const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user")
-const { getAllProducts,productById, read, remove, update } = require("../controllers/product")
+const { getAllProducts,productById, read, remove, update, list } = require("../controllers/product")
 
 //routes
 //Gets one product by Id
@@ -35,7 +35,9 @@ router.put(
     update,
 );
 //All products
-router.get("/products",getAllProducts)
+router.get('/products',getAllProducts);
+router.get('/products', list);
+
 //Parmas
 router.param("userId", userById);
 router.param("productId", productById);
