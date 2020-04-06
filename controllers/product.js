@@ -136,7 +136,9 @@ exports.update = (req, res) => {
     });
 };
 exports.getAllProducts = (req, res) =>{
-    Product.find().exec((err,data)=>{
+    Product.find()
+    .select("-photo")
+    .exec((err,data)=>{
         if(err){
             return res.status(400).json({
                 error:"Couldn't fetch products"
@@ -148,14 +150,14 @@ exports.getAllProducts = (req, res) =>{
 /**
  * sell/arrival
  * by sell = /products?sortBy=sold&order=desc&llimit=4
- * by arrival = /products?sortBy=createdAt&order=desc&llimit=4
+ * by arrival = /products?sortBy=createdAt&order=desc&limit=4
  * if no params are sent, then all products are returned
  */
 
- exports.list = (req,res) =>{
+ exports.listOfProducts = (req,res) =>{
      let order = req.query.order ? req.query.order :'asc'
      let sortBy = req.query.sortBy ? req.query.sortBy :'_id'
-     let limit = req.query.limit ? req.query.limit : 6
+     let limit = req.query.limit ? parseInt(req.query.limit) : 6
      
      Product.find()
         .select("-photo")
@@ -168,7 +170,23 @@ exports.getAllProducts = (req, res) =>{
                     error:"Products not found"
                 })
             }
-            res.send(products);
+            res.send(data);
         })
  }
-
+ /*it will find the products based on the req product category*/
+ exports.listOfRelatedProducts = (req,res) =>{
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6
+    /******************- $ne - Not include request poduct*/
+    Product.find({_id: {$ne: req.product}, category:req.product.category})
+    .select('-photo')
+    .limit(limit)
+    .populate('category','_id name')
+    .exec((err, products)=>{
+        if(err){
+            return res.status(400).json({
+                error:"Products not found"
+            })
+        }
+        res.send(products)
+    })
+ }
