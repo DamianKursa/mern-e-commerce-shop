@@ -1,17 +1,23 @@
-const User = require("../models/user");
+const express = require("express");
+const router = express.Router();
 
-exports.userById = (req, res, next, id) => {
-    User.findById(id).exec((err, user) => {
-        if (err || !user) {
-            return res.status(400).json({
-                error: "User not found"
-            });
-        }
+const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 
-        req.profile = user;
-        next();
+const { userById, readUser, updateUser } = require("../controllers/user");
+
+router.get("/secret/:userId", requireSignin, isAuth, isAdmin, (req, res) => {
+    res.json({
+        user: req.profile
     });
-};
+});
+
+router.get("/user/:userId", requireSignin, isAuth, readUser);
+router.put("/user/:userId", requireSignin, isAuth, updateUser);
+
+router.param("userId", userById);
+
+module.exports = router;
+
 /*What the code does is this: for routes that have a userId parameter 
 (that is, routes that look similar to this: /user/:userId), Express will 
 call the load() function before the route handler is called.
