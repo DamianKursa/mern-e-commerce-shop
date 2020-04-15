@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../layouts/Main";
 import { isAuthenticated } from "../auth/index";
 import { Link } from "react-router-dom";
-import { createProduct } from "../admin/apiAdmin";
+import { createProduct, getCategories } from "../admin/apiAdmin";
 
 const AddProduct = () => {
 
@@ -36,11 +36,20 @@ const AddProduct = () => {
         redirectToProfile,
         formData
     } = values;
-
+    // load cateogires and set form data
+    const init = () =>{
+        getCategories().then(data => {
+            if(data.error){
+               setValues({...values, error: data.error})
+            }else{
+                setValues({...values, categories: data,formData: new FormData()})
+            }
+        })
+    }
     const { user, token } = isAuthenticated();
 
     useEffect(() => {
-        setValues({ ...values, formData: new FormData() });
+        init()
     }, []);
 
     const handleChange = name => event => {
@@ -121,8 +130,10 @@ const AddProduct = () => {
                     onChange={handleChange("category")}
                     className="form-control"
                 >
-                    <option value="5e86470c81286f0f66f29172">First category</option>
-                    <option value="5e8876849453222e54b8b123">Second Category</option>
+                    <option>Please select</option>
+                    {categories && categories.map((category, index) => (
+                        <option key={index} value={category._id}>{category.name}</option>
+                    ))}
 
                 </select>
             </div>
@@ -151,14 +162,35 @@ const AddProduct = () => {
             <button className="btn btn-outline-primary">Create Product</button>
         </form>
     );
-
+    const showError = () =>(
+        <div className="alert alert-info" style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    )
+    const showSuccess = () =>(
+        <div className="alert alert-success" style={{display: createdProduct ? '' : 'none'}}>
+            <h2>{`${createdProduct} is created`}</h2>
+        </div>
+    )
+    const showLoading = () =>(
+            loading && (
+                <div className="alert alert-success">
+                    <h2>Loading...</h2>
+                </div>
+            )
+    )
     return (
         <Layout
             title="Add a new product"
             description={`G'day ${user.name}, ready to add a new product?`}
         >
             <div className="row">
-                <div className="col-md-8 offset-md-2">{newPostForm()}</div>
+                <div className="col-md-8 offset-md-2">
+                    {showError()}
+                    {showSuccess()}
+                    {showLoading()}
+                    {newPostForm()}
+                </div>
             </div>
         </Layout>
     );
