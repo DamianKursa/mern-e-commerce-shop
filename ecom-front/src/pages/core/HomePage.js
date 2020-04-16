@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Layout from '../../layouts/Main'
 import { getProducts } from './apiCore'
 import Card from './Card';
+
 const Home = () =>{
     const [productBySell, setProductsBySell] = useState([])
     const [productByArrival, setProductsByArrival] = useState([])

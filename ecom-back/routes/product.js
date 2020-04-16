@@ -40,7 +40,7 @@ router.get('/products', listOfProducts);
 router.get('/products/related/:productId',listOfRelatedProducts )
 router.get('/products/categories', getListCategories)
 router.post("/products/by/search", listBySearch);
-router.get('/product/photo', photo )
+router.get('/product/photo/:productId', photo )
 //Parmas
 router.param("userId", userById);
 router.param("productId", productById);

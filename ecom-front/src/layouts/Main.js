@@ -1,5 +1,6 @@
 import React from 'react'
 import MenuNavigation from '../components/MenuNavigation'
+import '../style.css'
 const Main = ({
   title = 'Title',
   description="Description",
