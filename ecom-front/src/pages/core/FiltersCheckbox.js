@@ -3,16 +3,17 @@ import { useState } from 'react'
 //NIE ROZUMIEM JAK TO DZIAŁA W PEŁNI
 const FiltersCheckbox = ({categories, handleFilters}) => {
 const [checked, setChecked] = useState([])
-//Higher Component Function - component zwraca funckcje
+//Higher Order Component Function - component zwraca funckcje
   const handleToggle = (category) => () =>{
       const currentCategoryId = checked.indexOf(category)
       const newCheckedCategoryId = [...checked]
+      // return the first index or -1 - jezeli zwraca -1 to znaczy ze nie ma tej kategori w state
       if(currentCategoryId === -1){
         newCheckedCategoryId.push(category)
       }else{
         newCheckedCategoryId.splice(currentCategoryId, 1)
       }
-      console.log(newCheckedCategoryId)
+      
       setChecked(newCheckedCategoryId)
       handleFilters(newCheckedCategoryId)
   }
