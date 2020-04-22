@@ -1,24 +1,23 @@
-import React from 'react'
-import MenuNavigation from '../components/MenuNavigation'
-import '../style.css'
+import React from "react"
+import MenuNavigation from "../components/MenuNavigation"
+import "../style.css"
 const Main = ({
-  title = 'Title',
-  description="Description",
+  title = "Title",
+  description = "Description",
   children,
-  className
+  className,
 }) => {
   return (
     <div>
       <nav>
         <MenuNavigation />
       </nav>
-      <div className ="jumbotron">
+      <div className="jumbotron">
         <h1>{title}</h1>
         <p className="lead">{description}</p>
       </div>
       <div className={className}>{children}</div>
     </div>
-
   )
 }
 

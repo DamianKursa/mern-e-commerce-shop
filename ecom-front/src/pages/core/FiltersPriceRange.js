@@ -1,28 +1,25 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react"
+import { useState } from "react"
 
-const FiltersPriceRange = ({prices, handleFilters}) => {
-
+const FiltersPriceRange = ({ prices, handleFilters }) => {
   const [priceRange, setPriceRange] = useState(0)
-  const handleChange = (event) =>{
-      
+  const handleChange = (event) => {
     handleFilters(event.target.value)
     setPriceRange(event.target.value)
   }
-  return prices.map((price,index) => (
+  return prices.map((price, index) => (
     <div key={index}>
-      <input 
+      <input
         value={`${price._id}`}
-        name={price} 
-        onChange={handleChange} 
-        type='radio' 
-        className="mr-2 ml-4" />
-      <label 
-        htmlFor="" 
-        className="form-check-label">{price.name}
+        name={price}
+        onChange={handleChange}
+        type="radio"
+        className="mr-2 ml-4"
+      />
+      <label htmlFor="" className="form-check-label">
+        {price.name}
       </label>
     </div>
-
   ))
 }
 
