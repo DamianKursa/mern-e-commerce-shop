@@ -100,7 +100,6 @@ const ShopPage = () => {
         className="container-fluid"
       >
         <div className="row">
-
           <div className="col-4">
             <h4>Filter by Category</h4>
             <ul>
