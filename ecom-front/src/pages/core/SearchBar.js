@@ -46,20 +46,34 @@ const Search = () => {
         e.preventDefault();
         searchData();
     };
-    const searchedProducts = ( results = []) =>{
-      return(
-        <div className='row'>
-          {results.map(( product,index )=>(
-            
-            <Card key={index} product={product} />
-          ))}
-        </div>
-      )}
-
-
 
     const handleChange = name => event => {
         setData({ ...data, [name]: event.target.value, searched: false });
+    };
+
+   const showSearhedMessage = (results, searched) =>{
+        if(searched == true && results.length > 0){
+            return `${results.length} products found`
+        }
+
+        if(searched === true && results.length < 1) {
+            return `No products found`
+        }
+    }
+
+    const searchedProducts = (results = []) => {
+        return (
+            <div>
+                <h1>
+                    {showSearhedMessage(results, searched)}
+                </h1>
+                <div className="row">
+                    {results.map((product, i) => (
+                        <Card key={i} product={product} />
+                    ))}
+                </div>
+            </div>
+        );
     };
 
     const searchForm = () => (
@@ -71,7 +85,7 @@ const Search = () => {
                             className="btn mr-2"
                             onChange={handleChange("category")}
                         >
-                            <option value="All">Pick Category</option>
+                            <option value="All">All</option>
                             {categories.map((c, i) => (
                                 <option key={i} value={c._id}>
                                     {c.name}
@@ -99,11 +113,9 @@ const Search = () => {
 
     return (
         <div className="row">
-            <div className="container mb-3">
-                {searchForm()}
-            </div>
+            <div className="container mb-3">{searchForm()}</div>
             <div className="container-fluid mb-3">
-              {searchedProducts(results)}
+                {searchedProducts(results)}
             </div>
         </div>
     );
