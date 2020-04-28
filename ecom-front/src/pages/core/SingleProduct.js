@@ -29,15 +29,12 @@ useEffect(
 
   return (
       <Layout
-        title="Shop Page"
-        description="Find your product"
+        title={product.name}
+        description={product.description}
         className="container-fluid"
       >
-        <div>
-          <h1>{product.name}</h1>
-          <h2>{product.price}</h2>
-          <h2>{product.cateogry}</h2>
-        {JSON.stringify(product)}
+        <div className="row">
+          <Card product={product} showViewProductButton={false}/>
         </div>
       </Layout>
 
@@ -45,3 +42,6 @@ useEffect(
 
 )}
 export default SingleProduct
+
+
+

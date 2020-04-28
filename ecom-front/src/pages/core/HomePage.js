@@ -45,8 +45,11 @@ const Home = () => {
       </div>
       <h2 className="mb-4">Recent Products</h2>
       <div className="row">
+
         {productByArrival.map((product, index) => (
-          <Card key={index} product={product} />
+          <div className="col-4 mb-3">
+            <Card key={index} product={product} />
+          </div>
         ))}
       </div>
     </Layout>

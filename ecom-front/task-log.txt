@@ -1,0 +1,26 @@
+
+DONE
+-----------
+1) Make Single Product template
+2) Dont show view product on single page - pass props
+3) Extrack button in separate function and render conditionaly
+5) instal moment pacakge 
+6) Use moment as function with props created at and fromNowfuctiion
+4) Add product details - use substring to 100 , populate cateogry
+------------
+TODO
+------------
+
+
+
+
+7) populate cateogry on backend 
+8) show Add to cart button as function 
+9) showStock as function and pass product quantity
+10) If quantity more than 0 return in stock , else out of stock - write it tenarry operator
+11)Create bakckend method listRelated
+12) Fetch related product after loading products in same function -Products
+13) Create relatedProduct state
+14) when we get data set state data to related state
+15) Display related products in product component and map through all
+16) cause update content when you click on related products by adding [props]  to use effect 
