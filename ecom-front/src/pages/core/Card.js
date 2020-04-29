@@ -16,7 +16,13 @@ const showViewButton = (showViewProductButton) => {
 
      )
   )}
-
+const showStock = () =>{
+  return (product.quantity > 0  ? 
+  <span class="badge badge-success">In stock </span>
+  : 
+  <span class="badge badge-danger">Out of stock </span>
+  );
+}
 const addToCartButton =() =>{
   return(
     <button className="btn btn-outline-secondary mt-2 mb-2">
@@ -35,12 +41,18 @@ const addToCartButton =() =>{
           <p className="9">
               Category : {product.category && product.category.name}
           </p>
+          
           <p>
           
               Added : {moment(product.createdAt).fromNow()}
           </p>
+          <p>
+            {showStock()}
+          </p>
+          
             {showViewButton(showViewProductButton)}
             {addToCartButton()}
+            
         </div>
       </div>
   )
