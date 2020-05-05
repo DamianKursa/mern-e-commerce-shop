@@ -22,8 +22,45 @@ TODO
 
 
 DONE - 108-115
+1) Create cart component helpers
+2) Add product to loclaStorage
+3) Check if we have window
+4) Create cart object
+5) CHeck if in loclaStorage is item created
+9) Setitem to card as JSON
+10) Call callback function
+11) Make method when you click on add to cart button , and fire 
+6) Push cart item 
+7) Map through cart item with mehod Array.from(new Set) and map through it 
+8) Map throug array and add items. ///
+13) Create total number of items in cart 
+14) Check if there is window objecj , check if there is cart item in local storage 
+15) Return in JSON localstorage lenth
+16) Add Cart menu item to menu with sub > small HTML and execute total function.
+18) Create Cart component
+17) Create in helpers method getCartItems from localstorage , if we don't have item then return empty array.
+19) Create state with items 
+20) useEffect populate items getCartItems and set state using function
+21) Map through items and return them as Card
+22) ShowItems or noItems message as tenarry operator
+23) Add to Card  addtocart as defuult true button
+24) Create method AddtoCart button logic in Card component
+25) Pass as props in Cart addto cart as false
+26) Pass cartUpdae as true in Cart
+27) add props to Card cart update false as defult 
+28) Creat method showCartUpdae option
+29) Return input if cartUpdate &&
+30) Create State of count in Card
 -----------
 
+
+
+
+
+
+31) Add value count and add onchangehandle 
+32) add onChange handleChange with product id and event Hihger function component
+33)Set count even target value  wiht tenarry operator if it's less than 1 make it as 1 otherwise take eventtarget value 
 ------------
 TODO
 

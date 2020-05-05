@@ -1,10 +1,17 @@
-import React from "react"
+import React,{ useState } from "react"
 import { Link } from "react-router-dom"
 import ShowImage from "./ShowImage"
-import moment from 'moment'
-const Card = ({ product, showViewProductButton = true }) => {
+import moment, { updateLocale } from 'moment'
+import { addItemToCart,updateQuantity } from './cardHelper'
+const Card = ({ 
+  product, 
+  showViewProductButton = true, 
+  showAddToCartButton = true,
+  showQuantityInput = false
 
-
+}) => {
+  const [ addedToCart , setAddedToCart ] = useState(false)
+  const [ count , setCount ] = useState(product.count)
 const showViewButton = (showViewProductButton) => {
   return(
     showViewProductButton && (
@@ -23,13 +30,38 @@ const showStock = () =>{
   <span class="badge badge-danger">Out of stock </span>
   );
 }
-const addToCartButton =() =>{
-  return(
-    <button className="btn btn-outline-secondary mt-2 mb-2">
-      Add to card 
+const addToCart = () => {
+  addItemToCart(product, () => {
+    setAddedToCart(true)
+  })
+
+}
+const handleChange = (productId) => event =>{
+    setCount(event.target.value < 1 ? 1 : event.target.value )
+    if(event.target.value >= 1){
+      updateQuantity(productId, event.target.value)
+    }
+} 
+const showQuantity = (showQuantityInput) => (
+  showQuantityInput &&( 
+    <div>
+      <label>Quantity :</label>
+      <input value={count} onChange={handleChange(product._id)} type="number" id="tentacles" name="tentacles"
+       min="1" max="100"/>
+    </div>
+
+  )
+)
+const addToCartButton = (showAddToCartButton) =>(
+  
+  showAddToCartButton && (
+    <button onClick={ addToCart }className="btn btn-outline-secondary mt-2 mb-2">
+      {addedToCart ? 'Added': 'Add to cart'}
     </button>
   )
-}
+
+)
+
   return (
 
       <div className="card">
@@ -51,7 +83,8 @@ const addToCartButton =() =>{
           </p>
           
             {showViewButton(showViewProductButton)}
-            {addToCartButton()}
+            {addToCartButton(showAddToCartButton)}
+            {showQuantity(showQuantityInput)}
             
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, withRouter } from "react-router-dom"
 import { signout, isAuthenticated } from "../auth/index"
+import { showCartLength } from '../pages/core/cardHelper'
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -35,6 +36,15 @@ const MenuNavigation = ({ history }) => {
             </Link>
           </li>
         )}
+
+        <li>
+          <Link 
+            className="nav-link" 
+            style={isActive(history, "/cart")} 
+            to="/cart">
+              Cart <sup><small className="cart-badge danger" >{showCartLength()}</small></sup>
+          </Link>
+        </li>
 
         {isAuthenticated() && isAuthenticated().user.role === 1 && (
           <li className="nav-item">
