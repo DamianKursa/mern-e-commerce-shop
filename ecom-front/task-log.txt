@@ -51,16 +51,23 @@ DONE - 108-115
 28) Creat method showCartUpdae option
 29) Return input if cartUpdate &&
 30) Create State of count in Card
------------
-
-
-
-
-
-
 31) Add value count and add onchangehandle 
 32) add onChange handleChange with product id and event Hihger function component
-33)Set count even target value  wiht tenarry operator if it's less than 1 make it as 1 otherwise take eventtarget value 
-------------
-TODO
-
+33)Set count even target value  wiht tenarry operator if it's less than 1 make it as 1 otherwise take eventtarget value
+4) Default pass as props false and set true in cart - remove button
+5) Create remove button in function
+1)Copy update method and change to remove 
+2) use cart.splice only one item
+3) Return cart
+-----------
+114-115
+-----------
+/// MAM BLAD NIE DIALA USUWANIE
+4) Default pass as props false and set true in cart - remove button
+5) Create remove button in function
+6) Execute remove button onlick as function
+7) Add items as callback function in Cart to update view
+8) Create checkout.js
+9) Pass products as props
+10) Display checkout in Cart and pass items as argument
+11) 

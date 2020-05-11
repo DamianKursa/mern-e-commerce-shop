@@ -2,12 +2,14 @@ import React,{ useState } from "react"
 import { Link } from "react-router-dom"
 import ShowImage from "./ShowImage"
 import moment, { updateLocale } from 'moment'
-import { addItemToCart,updateQuantity } from './cardHelper'
+import { addItemToCart,updateQuantity,removeItem, getItemFromCart } from './cardHelper'
 const Card = ({ 
   product, 
   showViewProductButton = true, 
   showAddToCartButton = true,
-  showQuantityInput = false
+  showQuantityInput = false,
+  removeFromCartButton = false,
+
 
 }) => {
   const [ addedToCart , setAddedToCart ] = useState(false)
@@ -62,6 +64,22 @@ const addToCartButton = (showAddToCartButton) =>(
 
 )
 
+  
+
+const removeButton = () =>{
+
+  return (
+    removeFromCartButton && (
+          <button
+              
+              onClick={() => removeItem(product._id)}
+              className="btn btn-outline-danger mt-2 mb-2"
+          >
+              Remove Product
+          </button>
+      )
+  );
+};
   return (
 
       <div className="card">
@@ -84,11 +102,12 @@ const addToCartButton = (showAddToCartButton) =>(
           
             {showViewButton(showViewProductButton)}
             {addToCartButton(showAddToCartButton)}
+            {removeButton(removeFromCartButton)}
             {showQuantity(showQuantityInput)}
+            
             
         </div>
       </div>
   )
-}
-
+  }
 export default Card

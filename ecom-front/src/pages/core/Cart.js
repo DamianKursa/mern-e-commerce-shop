@@ -1,25 +1,42 @@
-import React, { useState, useEffect } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import Layout from "../../layouts/Main"
 import Card from "./Card"
 import { getItemFromCart } from './cardHelper'
 
-const Cart = () => {
-  const [itemsInCart, setItemsInCart] = useState([])
 
+const Cart = (product) => {
+  const [itemsInCart, setItemsInCart] = useState([])
+  
   useEffect(() => {
-   setItemsInCart(getItemFromCart())
+    setItemsInCart(getItemFromCart());
   }, [])
 
-  const showCartProducts = () =>{
-    return(
-      itemsInCart.map((product,index)=>(
-          <Card showQuantityInput={true} showAddToCartButton = {false} product={product} key={index}/>
-      ))
-    )
-  }
+  const showCartProducts = (itemsInCart) => {
+    return (
+        <div>
+          {itemsInCart.map((product,index)=>{
+            return(
+              <div>
+            <Card
+              key={index}
+              product={product}
+              showAddToCartButton={false}
+              showQuantityInput={true}
+              removeFromCartButton={true}
+              itemsInCart={itemsInCart}
+                    />
+              </div>
+            )
+          })}
+        </div>
+    );
+};
+
+
   const showMessage = () =>{
     return <h2>There is {itemsInCart.length} products in your cart.</h2>
   }
+
   return (
     <div>
       <Layout
@@ -27,10 +44,12 @@ const Cart = () => {
         description="Find your product"
         className="container-fluid"
       >
-        {itemsInCart.length > 1 ? showCartProducts() :showMessage() }
+      <div className="col-6">
+        {itemsInCart.length > 0 ? showCartProducts(itemsInCart) : showMessage()}
+      </div>
       </Layout>
     </div>
   )
-}
-
+  }
 export default Cart
+
