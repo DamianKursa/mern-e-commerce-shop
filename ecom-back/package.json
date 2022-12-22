@@ -18,7 +18,7 @@
     "express-params": "0.0.3",
     "express-validator": "^5.3.1",
     "formidable": "^1.2.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "loadsh": "0.0.4",
     "mongoose": "^5.9.3",
     "morgan": "^1.9.1",
